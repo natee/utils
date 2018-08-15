@@ -8,15 +8,10 @@
  */
 
 const shuffle = arr => {
-  let i = arr.length
-  let j
-  let t
+  let i = arr.length, j
   while (i) {
-    j = Math.floor(Math.random() * i--)
-    
-    t = arr[i]
-    arr[i] = arr[j]
-    arr[j] = t
+    j = Math.floor(Math.random() * i--); // 这里的分号是必须的
+    [arr[j], arr[i]] = [arr[i], arr[j]]   
   }
 }
 
