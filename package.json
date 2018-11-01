@@ -2,10 +2,14 @@
   "name": "utils",
   "version": "1.0.0",
   "description": "",
-  "main": "shuffle.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "MIT"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natee/utils"
+  },
+  "homepage": "https://github.com/natee/utils#readme",
+  "author": "Zhao Ke <kerncink@gmail.com>"
 }
