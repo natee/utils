@@ -1,10 +1,9 @@
 /**
  * shuffle.js  数组随机排序（扑克牌算法）
  * @example
- *
- * const a = [1,2,3,4,5]
- * shuffle(a)
- * // => []
+ *    const a = [1,2,3,4,5]
+ *    shuffle(a)
+ *    console.log(a) // => [3, 1, 5, 2, 4]
  */
 
 const shuffle = arr => {
