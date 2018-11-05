@@ -1,6 +1,8 @@
 # utils
 JavaScript中常用的一些函数
-## 函数
+## 使用方法
+ES6语法，你可以单独引入一个文件，可一个copy函数到你自己的文件中。
+## 函数列表
 ### promise-delay.js
 promise-delay.js promise封装setTimeout延时处理
 
@@ -58,3 +60,6 @@ const a = [2,1,3,4,3]
 const b = stableSort(a)
 // => [1,2,3,3,4]
 ```
+
+## 许可证
+MIT
