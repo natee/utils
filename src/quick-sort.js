@@ -1,10 +1,9 @@
 /**
  * quick-sort.js  快排算法
  * @example
- *
  * const a = [2,13,3,14,5]
  * const b = quickSort(a)
- * // => [2,3,5,13,14]
+ * console.log(b) // => [2,3,5,13,14]
  */
 
 const quickSort = arr => {

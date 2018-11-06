@@ -1,10 +1,9 @@
 /**
  * stable-sort.js  稳定排序（Array.prototype.sort是非稳定排序）
  * @example
- *
  * const a = [2,1,3,4,3]
  * const b = stableSort(a)
- * // => [1,2,3,3,4]
+ * console.log(b) // => [1,2,3,3,4]
  */
 // 可以把stableSort绑到Array.prototype上，并增加处理函数，
 // 但是我不想这样做，适时而定

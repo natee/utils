@@ -54,7 +54,11 @@ function getNameByPath(path) {
 }
 
 function start(){
-  afterContent = afterContent.concat(rmConf.readmeDescription, rmConf.readmeUsage);
+  afterContent = afterContent.concat(
+    rmConf.readmeDescription, 
+    rmConf.readmeUsage, 
+    rmConf.readmeDevelop
+  );
 
   glob(files, {}, function (err, files) {
     afterContent.push('## Examples');

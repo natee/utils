@@ -1,7 +1,6 @@
 /**
  * promise-timeout.js 简单的超时处理
  * @example
- * 
  * const taskPromise = new Promise( (resolve, reject) => {
  *   // 任意异步事件
  *   var time = Math.random() * 2000;
