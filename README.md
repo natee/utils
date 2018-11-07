@@ -16,7 +16,6 @@
       * [许可证](#许可证)
 
 Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
-
 # utils
 JavaScript中常用的一些函数
 ## 说明

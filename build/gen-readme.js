@@ -6,7 +6,7 @@ const path = require('path');
 const fs = require('fs');
 const glob = require('glob');
 const chalk = require('chalk');
-const shellExec = require('shell-exec');
+const execa = require('execa');
 const dox = require('dox');
 const rmConf = require('./config');
 
@@ -84,7 +84,7 @@ function start(){
 
 function generateTable(){
   util.log(chalk.yellow('正在生成README目录...'));
-  shellExec('./gh-md-toc ./README.md').then( res => {
+  execa.shell('./gh-md-toc ./README.md').then( res => {
     // 目录生成完毕，重新写入readme中
     afterContent.unshift(res.stdout);
     touchReadme();
