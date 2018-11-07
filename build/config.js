@@ -15,13 +15,13 @@ const readmeUsage = [
 const readmeDevelop = [
   '## 开发',
   '使用rollup作为打包工具。',
-  '- `npm run dev`：开发环境。',
-  '    - 使用[rollup-watch](https://www.npmjs.com/package/rollup-watch)实时监听文件变动。',
+  '- `npm run dev`：启动开发环境。',
+  '    - 使用[chokidar](https://github.com/paulmillr/chokidar)监听文件变化，自动执行`npm run readme`重新生成readme文档，自动执行构建指令。',
+  '    - ~~使用[rollup-watch](https://www.npmjs.com/package/rollup-watch)实时监听文件变动。~~',
   '- `npm run build`：打包生成目标文件',
   '    - 使用[rollup-plugin-terser](https://www.npmjs.com/package/rollup-plugin-terser)压缩混淆。',
-  '- `npm run readme`：根据源文件注释生成`README.md`使用文档。',
+  '- `npm run readme`：你可以单独执行这个指令，根据源文件注释生成`README.md`使用文档。',
   '\n',
-  '代码提交前先手动执行一下`npm run readme`，后续增加自动执行。'
 ];
 
 const readmeLicense = [

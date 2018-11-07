@@ -36,6 +36,9 @@ const promisify = (func) => {
   }
 }
 
+const log = console.log.bind(console);
+
 module.exports = {
-  promisify
+  promisify,
+  log,
 }

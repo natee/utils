@@ -65,7 +65,7 @@ function start(){
     afterContent.push('## Examples');
 
     res.forEach(function (file) {
-      console.log(chalk.green('Parsing file: ' + file));
+      util.log(chalk.green('Parsing file: ' + file));
       const fileName = getNameByPath(file);
       if(fileName !== 'index'){
         const rawStr = fs.readFileSync(file, 'utf8');
@@ -83,16 +83,17 @@ function start(){
 }
 
 function generateTable(){
-  // afterContent = [];
-
+  util.log(chalk.yellow('正在生成README目录...'));
   shellExec('./gh-md-toc ./README.md').then( res => {
     // 目录生成完毕，重新写入readme中
     afterContent.unshift(res.stdout);
     touchReadme();
-    console.log(chalk.green('README生成完毕。'));
+    util.log(chalk.green('README生成完毕。'));
+
+    afterContent = [];
   }).catch( err => {
-    console.log(chalk.red('生成目录失败'));
-    console.log(err);
+    util.log(chalk.red('生成目录失败'));
+    util.log(err);
   })
 }
 
