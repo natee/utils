@@ -2,7 +2,7 @@ const readmeDescription = [
   '# utils',
   'JavaScript中常用的一些函数',
   '## 说明',
-  '此README文档通过执行`npm run readme`命令生成',
+  '此README文档通过执行`npm run readme`命令生成，目录是通过`gh-md-toc`生成。',
 ];
 
 const readmeUsage = [

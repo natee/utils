@@ -1,7 +1,26 @@
+
+目录
+=================
+
+   * [utils](#utils)
+      * [说明](#说明)
+      * [使用方法](#使用方法)
+      * [开发](#开发)
+      * [Examples](#examples)
+         * [promise-delay.js](#promise-delayjs)
+         * [promise-timeout.js](#promise-timeoutjs)
+         * [promisify.js](#promisifyjs)
+         * [quick-sort.js](#quick-sortjs)
+         * [shuffle.js](#shufflejs)
+         * [stable-sort.js](#stable-sortjs)
+      * [许可证](#许可证)
+
+Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
+
 # utils
 JavaScript中常用的一些函数
 ## 说明
-此README文档通过执行`npm run readme`命令生成
+此README文档通过执行`npm run readme`命令生成，目录是通过`gh-md-toc`生成。
 ## 使用方法
 - 源文件为ES6语法，你可以单独引入一个文件，也可以copy函数到你自己的文件中。
 - 如果你需要ES5语法的代码，你可以通过执行`npm run dev`生成一个`dist/cm-utils.js`文件，然后找到自己想要的函数。
@@ -17,9 +36,6 @@ JavaScript中常用的一些函数
 
 代码提交前先手动执行一下`npm run readme`，后续增加自动执行。
 ## Examples
-### index.js
-
-
 ### promise-delay.js
 promise-delay.js promise封装setTimeout延时处理
 

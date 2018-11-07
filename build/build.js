@@ -6,12 +6,14 @@ const path = require('path');
 const fs = require('fs');
 const glob = require('glob');
 const chalk = require('chalk');
+const shellExec = require('shell-exec');
 const dox = require('dox');
 const rmConf = require('./config');
 
 const srcDir = path.resolve(__dirname, '../src');
 const output = 'README.md';
 const files = srcDir + '/*.js';
+const util = require('./util');
 
 let afterContent = [];
 
@@ -25,8 +27,7 @@ function generate(tag) {
   return r;
 }
 
-function generateCodeExample(path, code) {
-  const fileName = getNameByPath(path);
+function generateCodeExample(fileName, code) {
   code.forEach(v => {
     const commentTags = v.tags;
     const description = v.description;
@@ -41,12 +42,10 @@ function generateCodeExample(path, code) {
   });
 }
 
-function writeFile() {
+function touchReadme() {
   fs.writeFileSync(
     output, afterContent.join('\n'), 'utf8'
   );
-  afterContent = [];
-  console.log(chalk.green('README生成完毕。'));
 }
 
 function getNameByPath(path) {
@@ -60,20 +59,41 @@ function start(){
     rmConf.readmeDevelop
   );
 
-  glob(files, {}, function (err, files) {
+  const globAsync = util.promisify(glob);
+
+  globAsync(files).then( res => {
     afterContent.push('## Examples');
 
-    files.forEach(function (file) {
+    res.forEach(function (file) {
       console.log(chalk.green('Parsing file: ' + file));
-      const rawStr = fs.readFileSync(file, 'utf8');
-      const code = dox.parseComments(rawStr);
-      generateCodeExample(file, code);
+      const fileName = getNameByPath(file);
+      if(fileName !== 'index'){
+        const rawStr = fs.readFileSync(file, 'utf8');
+        const code = dox.parseComments(rawStr);
+        generateCodeExample(fileName, code);
+      }
     });
 
     afterContent = afterContent.concat(rmConf.readmeLicense);
-  
-    writeFile();
+    touchReadme();
+
+    generateTable();
   });
+
+}
+
+function generateTable(){
+  // afterContent = [];
+
+  shellExec('./gh-md-toc ./README.md').then( res => {
+    // 目录生成完毕，重新写入readme中
+    afterContent.unshift(res.stdout);
+    touchReadme();
+    console.log(chalk.green('README生成完毕。'));
+  }).catch( err => {
+    console.log(chalk.red('生成目录失败'));
+    console.log(err);
+  })
 }
 
 start();
