@@ -39,9 +39,13 @@ JavaScript中常用的一些函数
 promise-delay.js promise封装setTimeout延时处理
 
 ```javascript
-const a = promiseDelay(1000).then(()=>{
+const pdObj = promiseDelay(1000);
+pdObj.promise().then(()=>{
   console.log('done')
-})
+});
+
+// 取消setTimeout
+pdObj.clearTimeout();
 ```
 
 ### promise-timeout.js

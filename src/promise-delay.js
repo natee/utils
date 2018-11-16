@@ -1,15 +1,26 @@
 /**
  * promise-delay.js promise封装setTimeout延时处理
  * @example
- * const a = promiseDelay(1000).then(()=>{
+ * const pdObj = promiseDelay(1000);
+ * pdObj.promise().then(()=>{
  *   console.log('done')
- * })
+ * });
+ * 
+ * // 取消setTimeout
+ * pdObj.clearTimeout();
  */
 
- const promiseDelay = ms => {
-   return new Promise( resolve => {
-     setTimeout( resolve, ms)
-   })
- }
+const promiseDelay = ms => {
+  let timeout
+
+  return {
+    promise: () => {
+      return new Promise( resolve => { 
+        timeout = setTimeout( resolve, ms)
+      })
+    },
+    clearTimeout: () => clearTimeout(timeout)
+  }
+}
 
  export default promiseDelay
