@@ -7,7 +7,10 @@
       * [使用方法](#使用方法)
       * [开发](#开发)
       * [Examples](#examples)
+         * [promise-any.js](#promise-anyjs)
          * [promise-delay.js](#promise-delayjs)
+         * [promise-first.js](#promise-firstjs)
+         * [promise-none.js](#promise-nonejs)
          * [promise-timeout.js](#promise-timeoutjs)
          * [promisify.js](#promisifyjs)
          * [quick-sort.js](#quick-sortjs)
@@ -35,6 +38,21 @@ JavaScript中常用的一些函数
 
 
 ## Examples
+### promise-any.js
+promise-any.js 实现Promise.any函数，类似Promise.all()，但是会忽略掉reject，所以它只需要有resolve的即可。
+
+```javascript
+promiseAny([Promise.reject(1), Promise.resolve(2), Promise.resolve(3)]).then( res => {
+  console.log('one resolved',res) // [2,3]
+});
+
+promiseAny([Promise.reject(1), Promise.reject(2)]).then( res => {
+  console.log('one resolved')
+}).catch( err => {
+  console.log('all rejected') // all rejected
+});
+```
+
 ### promise-delay.js
 promise-delay.js promise封装setTimeout延时处理
 
@@ -46,6 +64,39 @@ pdObj.promise().then(()=>{
 
 // 取消setTimeout
 pdObj.clearTimeout();
+```
+
+### promise-first.js
+promise-first.js 实现Promise.first函数，返回第一个resolve的promise结果
+
+说明：实现思路：拒绝promiseNone则表示至少有一个promise是resolve状态，我个人认为这个叫做Promise.one或Promise.some更合适
+
+
+```javascript
+promiseFirst([Promise.resolve(1), Promise.resolve(2)]).then( res => {
+  console.log('one resolved', res) // 1, not [1,2]
+});
+
+promiseFirst([Promise.reject(1), Promise.reject(2)]).then( res => {
+  console.log('one resolved')
+}).catch( err => {
+  console.log('all rejected')
+});
+```
+
+### promise-none.js
+promise-none.js 实现Promise.none函数，所有promise被拒绝则表示完成
+
+```javascript
+promiseNone([Promise.reject(1), Promise.reject(2)]).then( res => {
+  console.log('all rejected')
+});
+
+promiseNone([Promise.resolve(1), Promise.reject(2)]).then( res => {
+  console.log('all rejected')
+}).catch( err => {
+  console.log('one was not rejected')
+});
 ```
 
 ### promise-timeout.js
