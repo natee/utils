@@ -2,14 +2,24 @@
  * promise-any.js 实现Promise.any函数，类似Promise.all()，但是会忽略掉reject，所以它只需要有resolve的即可。
  * 
  * @example
- * promiseAny([Promise.reject(1), Promise.resolve(2), Promise.resolve(3)]).then( res => {
- *   console.log('one resolved',res) // [2,3]
+ * const delay = time => 
+ *   new Promise((resolve, reject) => {
+ *     setTimeout(()=>{resolve(time);}, time)
+ *   })
+ * 
+ * promiseAny([
+ *   Promise.reject(1),
+ *   delay(300),
+ *   delay(100),
+ *   Promise.resolve(4)
+ * ]).then( res => {
+ *   console.log('one resolved',res) // => [4, 100, 300]
  * });
  * 
  * promiseAny([Promise.reject(1), Promise.reject(2)]).then( res => {
  *   console.log('one resolved')
  * }).catch( err => {
- *   console.log('all rejected') // all rejected
+ *   console.log('all rejected') // => all rejected
  * });
  */
 

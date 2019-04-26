@@ -10,6 +10,7 @@
          * [promise-any.js](#promise-anyjs)
          * [promise-delay.js](#promise-delayjs)
          * [promise-first.js](#promise-firstjs)
+         * [promise-last.js](#promise-lastjs)
          * [promise-none.js](#promise-nonejs)
          * [promise-timeout.js](#promise-timeoutjs)
          * [promisify.js](#promisifyjs)
@@ -42,14 +43,24 @@ JavaScript中常用的一些函数
 promise-any.js 实现Promise.any函数，类似Promise.all()，但是会忽略掉reject，所以它只需要有resolve的即可。
 
 ```javascript
-promiseAny([Promise.reject(1), Promise.resolve(2), Promise.resolve(3)]).then( res => {
-  console.log('one resolved',res) // [2,3]
+const delay = time => 
+  new Promise((resolve, reject) => {
+    setTimeout(()=>{resolve(time);}, time)
+  })
+
+promiseAny([
+  Promise.reject(1),
+  delay(300),
+  delay(100),
+  Promise.resolve(4)
+]).then( res => {
+  console.log('one resolved',res) // => [4, 100, 300]
 });
 
 promiseAny([Promise.reject(1), Promise.reject(2)]).then( res => {
   console.log('one resolved')
 }).catch( err => {
-  console.log('all rejected') // all rejected
+  console.log('all rejected') // => all rejected
 });
 ```
 
@@ -67,20 +78,58 @@ pdObj.clearTimeout();
 ```
 
 ### promise-first.js
-promise-first.js 实现Promise.first函数，返回第一个resolve的promise结果
+promise-first.js 实现Promise.first函数，返回最先resolve的promise结果
 
 说明：实现思路：拒绝promiseNone则表示至少有一个promise是resolve状态，我个人认为这个叫做Promise.one或Promise.some更合适
 
 
 ```javascript
-promiseFirst([Promise.resolve(1), Promise.resolve(2)]).then( res => {
-  console.log('one resolved', res) // 1, not [1,2]
+const delay = time => 
+  new Promise((resolve, reject) => {
+    setTimeout(()=>{resolve(time);}, time)
+  })
+
+promiseFirst([
+  Promise.reject(1),
+  delay(300),
+  delay(100),
+  Promise.resolve(4)
+]).then( res => {
+  console.log('one resolved', res) // => 4, not 300, not [4,100,300]
 });
 
 promiseFirst([Promise.reject(1), Promise.reject(2)]).then( res => {
   console.log('one resolved')
 }).catch( err => {
-  console.log('all rejected')
+  console.log('all rejected') // => all rejected
+});
+```
+
+### promise-last.js
+promise-last.js 实现Promise.last函数，返回最后一个resolve的promise结果
+
+说明：实现思路：promiseAny()的最后一个则为last
+
+
+```javascript
+const delay = time => 
+  new Promise((resolve, reject) => {
+    setTimeout(()=>{resolve(time);}, time)
+  })
+
+promiseLast([
+  Promise.reject(1),
+  delay(300),
+  delay(100),
+  Promise.resolve(4)
+]).then( res => {
+  console.log('one resolved', res) // => 300, not 4
+});
+
+promiseLast([Promise.reject(1), Promise.reject(2)]).then( res => {
+  console.log('one resolved')
+}).catch( err => {
+  console.log('all rejected') // => all rejected
 });
 ```
 
