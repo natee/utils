@@ -23,6 +23,9 @@ function generate(tag) {
     r.push('```javascript');
     r.push(`${tag.string}`);
     r.push('```\n');
+  } else if(tag.type === 'description'){
+    r.push(`说明：${tag.string}`);
+    r.push('\n');
   }
   return r;
 }
