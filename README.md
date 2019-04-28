@@ -138,9 +138,9 @@ promiseLast([Promise.reject(1), Promise.reject(2)]).then( res => {
 promise-map.js 实现Promise.map函数，对所有promise迭代执行某操作
 
 ```javascript
-promiseMap([Promise.resolve(1), Promise.reject("Oops")], (v) => {
+promiseMap([Promise.resolve(1), Promise.reject("Oops")], function resolveFn(v){
   return v * 2
-}, (v) => {
+}, function rejectFn(v){
   return `err: ${v}`
 }).then( res => {
   console.log(res) // => [2, "err: Oops"]
