@@ -8,6 +8,7 @@ import promiseNone from './promise-none';
 import promiseAny from './promise-any';
 import promiseFirst from './promise-first';
 import promiseLast from './promise-last';
+import promiseMap from './promise-map';
 
 let module = {
   shuffle,
@@ -19,7 +20,8 @@ let module = {
   stableSort,
   promisify,
   promiseFirst,
-  promiseLast
+  promiseLast,
+  promiseMap
 };
 
 export default module;

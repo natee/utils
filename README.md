@@ -11,6 +11,7 @@
          * [promise-delay.js](#promise-delayjs)
          * [promise-first.js](#promise-firstjs)
          * [promise-last.js](#promise-lastjs)
+         * [promise-map.js](#promise-mapjs)
          * [promise-none.js](#promise-nonejs)
          * [promise-timeout.js](#promise-timeoutjs)
          * [promisify.js](#promisifyjs)
@@ -130,6 +131,19 @@ promiseLast([Promise.reject(1), Promise.reject(2)]).then( res => {
   console.log('one resolved')
 }).catch( err => {
   console.log('all rejected') // => all rejected
+});
+```
+
+### promise-map.js
+promise-map.js 实现Promise.map函数，对所有promise迭代执行某操作
+
+```javascript
+promiseMap([Promise.resolve(1), Promise.reject("Oops")], (v) => {
+  return v * 2
+}, (v) => {
+  return `err: ${v}`
+}).then( res => {
+  console.log(res) // => [2, "err: Oops"]
 });
 ```
 
