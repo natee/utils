@@ -33,7 +33,11 @@ const promiseAny = prs => {
     ).catch(e => {})
   )).then(res => 
     new Promise((resolve, reject) => {
-      result.length ? resolve(result) : reject()
+      if(result.length){
+        resolve(result)
+      }else{
+        reject('All rejected')
+      }
     })
   )
 }
