@@ -25,13 +25,9 @@ const promisify = (func) => {
     return new Promise((resolve, reject) => {
 
       // 第二个参数为原函数的回调函数
-      func(...args, (err, data) => {
-        if (err) {
-          reject(err)
-        } else {
-          resolve(data)
-        }
-      })
+      func.apply(null, [...args, (err, data) => {
+        return err ? reject(err) : resolve(data)
+      }])
     });
   }
 }
