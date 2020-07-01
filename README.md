@@ -7,6 +7,7 @@
       * [使用方法](#使用方法)
       * [开发](#开发)
       * [Examples](#examples)
+         * [promise-allSettled.js](#promise-allsettledjs)
          * [promise-any.js](#promise-anyjs)
          * [promise-delay.js](#promise-delayjs)
          * [promise-first.js](#promise-firstjs)
@@ -40,6 +41,30 @@ JavaScript中常用的一些函数
 
 
 ## Examples
+### promise-allSettled.js
+promise-allSettled.js 实现Promise.allSettled函数，类似Promise.all()，但是结果同时包含resolve和reject。<br />
+对于每个结果对象，都有一个status 字符串。如果状态为fulfilled，则存在一个value 。如果状态为rejected，则说明原因 。
+
+```javascript
+const delay = time => 
+  new Promise((resolve, reject) => {
+    setTimeout(()=>{resolve(time);}, time)
+  })
+
+promiseAllSettled([
+  Promise.reject(1),
+  delay(300),
+  delay(100),
+  Promise.resolve(4)
+]).then( res => {
+  console.log(res) // => 1, 300, 100, 4
+});
+
+promiseAllSettled([Promise.reject(1), Promise.resolve(2)]).then( res => {
+  console.log(res)
+})
+```
+
 ### promise-any.js
 promise-any.js 实现Promise.any函数，类似Promise.all()，但是会忽略掉reject，所以它只需要有resolve的即可。
 
