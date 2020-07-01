@@ -28,7 +28,7 @@ const promisify = (func) => {
       func.apply(null, [...args, (err, data) => {
         return err ? reject(err) : resolve(data)
       }])
-    });
+     });
   }
 }
 

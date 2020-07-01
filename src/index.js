@@ -9,6 +9,7 @@ import promiseAny from './promise-any';
 import promiseFirst from './promise-first';
 import promiseLast from './promise-last';
 import promiseMap from './promise-map';
+import promiseAllSettled from './promise-allSettled';
 
 let module = {
   shuffle,
@@ -21,7 +22,8 @@ let module = {
   promisify,
   promiseFirst,
   promiseLast,
-  promiseMap
+  promiseMap,
+  promiseAllSettled
 };
 
 export default module;
